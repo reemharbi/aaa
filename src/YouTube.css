@@ -1,0 +1,33 @@
+
+.video-react-video{
+size:1%;
+color: red;
+height: 183px;
+width: 189px;}
+
+.video-react-big-play-button, .video-react-big-play-button-left ,.big-play-button-hide,.video-react-current-time ,.video-react-time-control, .video-react-control{
+    display: none;
+}
+.video-react-current-time, .video-react-time-control ,.video-react-control{
+    display: none;
+}
+.video-react-progress-control {    display: none;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    size:15%;
+  }
+  .container {
+    width: 10%;
+    height: 0;
+    padding-bottom: 6.25%;
+    position: relative;}
+    .player {
+      position: absolute;
+      top: 0;
+      width: 10%;
+      height: 10%;
+    }
