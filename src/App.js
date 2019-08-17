@@ -15,6 +15,7 @@ import Home from './Home'
 
 export default function App() {
     return (
+   
       <Router>
         <nav>
           
@@ -34,6 +35,7 @@ export default function App() {
           </Switch>
         </div>
       </Router>
+   
     );
   }
   
