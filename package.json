@@ -15,6 +15,8 @@
     "react-scripts": "3.1.1",
     "reactstrap": "^8.0.1",
     "semantic-ui": "^2.4.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.87.3",
     "video-react": "^0.14.1"
   },
   "scripts": {

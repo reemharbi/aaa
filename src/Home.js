@@ -46,11 +46,33 @@ class Home extends Component {
     return (
       <div class ='center'>
       
+
+      <div class="ui inverted segment">
         <ImgDetails imgDetails={StoryData[this.state.currentIndex]} />
-     <div class='bottom'>
-        <button onClick={() => this.Prev()}> {StoryData[this.state.currentIndex].leftChoice.text} </button>
-        <button onClick={() => this.Next()}> {StoryData[this.state.currentIndex].rightChoice.text} </button> 
-        </div>
+  
+ 
+  <h4 class="ui horizontal inverted divider">
+    Choose
+  </h4>
+</div>
+
+        <div class="ui segment">
+  <div class="ui two column very relaxed grid">
+    <div class="column">
+    <button class='ui button' onClick={() => this.Prev()}> {StoryData[this.state.currentIndex].leftChoice.text} </button>
+
+    </div>
+    <div class="column">
+    <button class='ui button' onClick={() => this.Next()}> {StoryData[this.state.currentIndex].rightChoice.text} </button> 
+
+    </div>
+  </div>
+  <div class="ui vertical divider">
+    or
+  </div>
+</div>
+
+     
       </div>
     );
   }
