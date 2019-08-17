@@ -1,6 +1,6 @@
 
 import React ,{Component} from  'react';
-import axios from 'axios';
+// import axios from 'axios';
 import ImgDetails from './ImgDetails'
 import StoryData from './StoryData'
 import './Home.css';
@@ -15,7 +15,7 @@ let index=1;
 class Home extends Component {
 
   state = {
-    currentIndex: 0,
+    currentIndex: 1,
 
   }
 
@@ -23,25 +23,22 @@ class Home extends Component {
 
   Next() {
 
-    if (StoryData[this.state.currentIndex + 1]) {
-      this.setState({ currentIndex: this.state.currentIndex + 1 })
-    } else {
+    
       this.setState({
-        currentIndex: 0,
+        currentIndex: StoryData[this.state.currentIndex].rightChoice.rightID
       
       })
-    }
+    console.log(this.state.currentIndex)
   }
   Prev() {
 
-    if (StoryData[this.state.currentIndex - 1]) {
-      this.setState({ currentIndex: this.state.currentIndex - 1})
-    } else {
+    
       this.setState({
-        currentIndex: 8,
+        currentIndex: StoryData[this.state.currentIndex].leftChoice.leftID
  
       })
-    }
+      console.log(this.state.currentIndex)
+    
   }
 
   render() {
@@ -51,8 +48,8 @@ class Home extends Component {
       
         <ImgDetails imgDetails={StoryData[this.state.currentIndex]} />
      <div class='bottom'>
-        <button onClick={() => this.Prev()}>Prev </button> 
-        <button onClick={() => this.Next()}>Next </button>
+        <button onClick={() => this.Prev()}> {StoryData[this.state.currentIndex].leftChoice.text} </button>
+        <button onClick={() => this.Next()}> {StoryData[this.state.currentIndex].rightChoice.text} </button> 
         </div>
       </div>
     );
