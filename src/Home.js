@@ -16,7 +16,7 @@ class Home extends Component {
 
   state = {
     currentIndex: 0,
-    char: ""
+
   }
 
   
@@ -28,7 +28,7 @@ class Home extends Component {
     } else {
       this.setState({
         currentIndex: 0,
-        char: ""
+      
       })
     }
   }
