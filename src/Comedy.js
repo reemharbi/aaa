@@ -1,12 +1,12 @@
 import React ,{Component} from  'react';
 
-class Comdia extends Component{
+class Comedy extends Component{
 render(){
 
     return(
-        <p>Comdia</p>
+        <p>Comedy</p>
     )
 }
 
 }
-export default Comdia
+export default Comedy
