@@ -1,6 +1,6 @@
 import React from 'react';
 import Drama from './Drama';
-import Comdia from './Comdia'
+import Comedy from './Comedy'
 import Horror from './Horror'
 import {
   BrowserRouter as Router,
@@ -21,15 +21,15 @@ export default function App() {
           
           <Link to="/">Home</Link>{' '}
           <Link to="/Drama">Drama</Link>{' '}
-          <Link to="/Comdia">Comdia </Link>{' '}
-     <Link to="/Horror">  Horror</Link>
+          <Link to="/Comedy">Comedy </Link>{' '}
+          <Link to="/Horror">  Horror</Link>
         </nav>
   
         <div>
             <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/Drama" component={Drama} />
-          <Route path="/Comdia" component={Comdia} />
+          <Route path="/Comedy" component={Comedy} />
           <Route path="/Horror" component={Horror} />
           <Route component={Home} />
           </Switch>
