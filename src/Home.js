@@ -1,6 +1,6 @@
 
 import React ,{Component} from  'react';
-// import axios from 'axios';
+import axios from 'axios';
 import ImgDetails from './ImgDetails'
 import StoryData from './StoryData'
 import './Home.css';
@@ -8,14 +8,15 @@ import YouTube from './YouTube'
 import Drama from './Drama'
 import { Switch,Route, Link, BrowserRouter as Router } from 'react-router-dom'
 export * from "react-router";
-console.log(StoryData[0]);
-console.log(StoryData[1]);
+
 let index=1;
 
 class Home extends Component {
 
   state = {
     currentIndex: 1,
+  scene: {}
+
 
   }
 
@@ -25,21 +26,51 @@ class Home extends Component {
 
     
       this.setState({
-        currentIndex: StoryData[this.state.currentIndex].rightChoice.rightID
+        currentIndex: this.state.scene.right_id
       
       })
     console.log(this.state.currentIndex)
+this.callApi(this.state.scene.right_id)
   }
+
+  callApi(id){
+
+    axios({
+      method: 'GET',
+      url: `https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${id}.json`
+    }).then(response => {
+      
+      this.setState({scene: response.data}) 
+      console.log(this.state.scene);
+    
+    }).catch(error => console.log(error));
+  }
+
   Prev() {
 
     
       this.setState({
-        currentIndex: StoryData[this.state.currentIndex].leftChoice.leftID
+        currentIndex: this.state.scene.left_id
  
       })
       console.log(this.state.currentIndex)
+this.callApi(this.state.scene.left_id)
     
   }
+
+  componentDidMount(){
+
+    axios({
+      method: 'GET',
+      url: `https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${this.state.currentIndex}.json`
+    }).then(response => {
+      
+      this.setState({scene: response.data}) 
+      console.log(this.state.scene);
+    
+    }).catch(error => console.log(error));
+  }
+
 
   render() {
 
@@ -48,7 +79,7 @@ class Home extends Component {
       
 
       <div class="ui inverted segment">
-        <ImgDetails imgDetails={StoryData[this.state.currentIndex]} />
+        <ImgDetails imgDetails={this.state.scene} />
   
  
   <h4 class="ui horizontal inverted divider">
@@ -59,11 +90,11 @@ class Home extends Component {
         <div class="ui segment">
   <div class="ui two column very relaxed grid">
     <div class="column">
-    <button class='ui button' onClick={() => this.Prev()}> {StoryData[this.state.currentIndex].leftChoice.text} </button>
+    <button class='ui button' onClick={() => this.Prev()}> {this.state.scene.left_text} </button>
 
     </div>
     <div class="column">
-    <button class='ui button' onClick={() => this.Next()}> {StoryData[this.state.currentIndex].rightChoice.text} </button> 
+    <button class='ui button' onClick={() => this.Next()}> {this.state.scene.right_text} </button> 
 
     </div>
   </div>
