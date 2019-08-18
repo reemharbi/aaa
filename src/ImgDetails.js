@@ -7,7 +7,7 @@ class ImgDetails extends Component {
         return (
             <div className="card">
        
-                <p>{this.props.imgDetails.text}</p>
+                <p>{this.props.imgDetails.scene_text}</p>
             </div>
         )
     }
