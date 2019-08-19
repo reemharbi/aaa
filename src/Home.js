@@ -2,6 +2,8 @@
 import React ,{Component} from  'react';
 import axios from 'axios';
 import ImgDetails from './ImgDetails'
+import RightButton from './RightButton'
+import LeftButton from './LeftButton'
 import StoryData from './StoryData'
 import './Home.css';
 import YouTube from './YouTube'
@@ -90,12 +92,13 @@ this.callApi(this.state.scene.left_id)
         <div class="ui segment">
   <div class="ui two column very relaxed grid">
     <div class="column">
-    <button class='ui button' onClick={() => this.Prev()}> {this.state.scene.left_text} </button>
+    {/* <button class='ui button' onClick={() => this.Prev()}> {this.state.scene.left_text} </button> */}
+    <LeftButton  data={this.state.scene.left_text}  prev= {()=>this.Prev()}/>
 
     </div>
     <div class="column">
-    <button class='ui button' onClick={() => this.Next()}> {this.state.scene.right_text} </button> 
-
+    {/* <button class='ui button' onClick={() => this.Next()}> {this.state.scene.right_text} </button>  */}
+    <RightButton  data={this.state.scene.right_text} next= {()=>this.Next()}/>
     </div>
   </div>
   <div class="ui vertical divider">
