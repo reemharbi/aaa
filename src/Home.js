@@ -12,7 +12,7 @@ import { Switch,Route, Link, BrowserRouter as Router } from 'react-router-dom'
 export * from "react-router";
 
 let index=1;
-
+let apiCallCount = 0;
 class Home extends Component {
 
   state = {
@@ -22,18 +22,37 @@ class Home extends Component {
 
   }
 
-  
+  fakeAPICall = () =>
+  new Promise((resolve, reject) => {
+    apiCallCount++;
+    if (apiCallCount % 3 === 2) {
+    //   setTimeout(() => reject(new Error("fake error")), 1000);
+    // } else {
+      setTimeout(() => resolve(), 1000);
+    }
+ 
+  });
 
   Next() {
 
     
-      this.setState({
-        currentIndex: this.state.scene.right_id
-      
-      })
-    console.log(this.state.currentIndex)
-this.callApi(this.state.scene.right_id)
-  }
+
+
+    
+      const scene =  this.state.scene
+      scene.right_text = 'loading'
+          this.setState({
+            scene: scene
+          
+          })
+            this.fakeAPICall();
+            this.setState({
+              currentIndex: this.state.scene.right_id
+            
+            })
+      console.log(this.state.currentIndex)
+  this.callApi(this.state.scene.right_id)
+    }
 
   callApi(id){
 
@@ -51,17 +70,29 @@ this.callApi(this.state.scene.right_id)
   Prev() {
 
     
-      this.setState({
-        currentIndex: this.state.scene.left_id
- 
-      })
-      console.log(this.state.currentIndex)
+   
+    const scene =  this.state.scene
+    scene.left_text = 'loading'
+        this.setState({
+          scene: scene
+        
+        })
+          this.fakeAPICall();
+          this.setState({
+            currentIndex: this.state.scene.left_id
+          
+          })
+    console.log(this.state.currentIndex)
 this.callApi(this.state.scene.left_id)
-    
   }
 
   componentDidMount(){
-
+    const scene =  this.state.scene
+    scene.right_text = 'loading'
+    scene.left_text = 'loading'
+        this.setState({
+          scene: scene
+        }) 
     axios({
       method: 'GET',
       url: `https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${this.state.currentIndex}.json`
