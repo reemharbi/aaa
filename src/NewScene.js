@@ -50,24 +50,30 @@ export default class NewScene extends Component {
 
         if (this.props.isLeft == true){
             axios.patch(`https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${this.props.id}.json` , {
-            "left_id": this.state.resId
+            "left_id": response.data.id
     
             }).then(res => console.log(res)).catch(error => console.log(error))
+            this.props.updateView(this.state.resId)
+
     
         }
         else{
 
             axios.patch(`https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${this.props.id}.json` , {
-                "right_id": this.state.resId
+                "right_id": response.data.id
         
                 }).then(res => console.log(res)).catch(error => console.log(error))
-        
-        }
-
+                console.log("the id " +this.state.resId)
+                
+                this.props.updateView(this.state.resId)
+                
+                
+            }
+            
         }).catch(error => console.log(error))
-
-
-        this.props.updateView(this.state.resId)
+        
+// console.log("the id " +this.state.resId)
+        // this.props.updateView(this.state.resId)
     }
 
     render() {
