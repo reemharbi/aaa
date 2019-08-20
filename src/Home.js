@@ -27,6 +27,13 @@ class Home extends Component {
 
   }
 
+  updateView = id => {
+    this.setState({
+      id: id,
+      isEnd: false
+    })
+  }
+
   fakeAPICall = () =>
   new Promise((resolve, reject) => {
     apiCallCount++;
@@ -133,7 +140,7 @@ this.callApi(this.state.scene.left_id)
 
   render() {
     if (this.state.isEnd)
-      return <NewScene isLeft={this.state.isLeft} id={this.state.newID}/>
+      return <NewScene isLeft={this.state.isLeft} id={this.state.newID} updateView={this.updateView}/>
       else
       return <Scene scene={this.state.scene} prev={this.Prev} next={this.Next}/>
     
