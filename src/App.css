@@ -20,7 +20,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #494c4d;
 }
 
 @keyframes App-logo-spin {
@@ -33,5 +33,10 @@
 }
 
 nav{
-  color: blue
+  color: #494c4d;
+}
+.grey{
+  color: #494c4d;
+  background: rebeccapurple;
+
 }
