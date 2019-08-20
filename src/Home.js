@@ -9,6 +9,8 @@ import './Home.css';
 import YouTube from './YouTube'
 import Drama from './Drama'
 import { Switch,Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import NewScene from './NewScene';
+import Scene from './Scene';
 export * from "react-router";
 
 let index=1;
@@ -16,8 +18,11 @@ let apiCallCount = 0;
 class Home extends Component {
 
   state = {
-    currentIndex: 1,
-  scene: {}
+    id: 1,
+  scene: {},
+  isEnd: false,
+  isLeft: true,
+  newID:0
 
 
   }
@@ -33,10 +38,10 @@ class Home extends Component {
  
   });
 
-  Next() {
+  Next = ()=> {
 
     
-
+    if(this.state.scene.right_id){
 
     
       const scene =  this.state.scene
@@ -47,12 +52,22 @@ class Home extends Component {
           })
             this.fakeAPICall();
             this.setState({
-              currentIndex: this.state.scene.right_id
+              id: this.state.scene.right_id
             
             })
-      console.log(this.state.currentIndex)
+      console.log(this.state.id)
   this.callApi(this.state.scene.right_id)
     }
+
+    else 
+    this.setState({
+      isEnd: true,
+      isLeft: false,
+      newID: this.state.scene.id
+    })
+
+
+  }
 
   callApi(id){
 
@@ -62,14 +77,13 @@ class Home extends Component {
     }).then(response => {
       
       this.setState({scene: response.data}) 
-      console.log(this.state.scene);
     
     }).catch(error => console.log(error));
   }
 
-  Prev() {
+  Prev =  () => {
 
-    
+    if (this.state.scene.left_id){
    
     const scene =  this.state.scene
     scene.left_text = 'loading'
@@ -79,11 +93,23 @@ class Home extends Component {
         })
           this.fakeAPICall();
           this.setState({
-            currentIndex: this.state.scene.left_id
+            id: this.state.scene.left_id
           
           })
-    console.log(this.state.currentIndex)
+    console.log(this.state.id)
 this.callApi(this.state.scene.left_id)
+        }
+        else {
+          this.setState({
+            isEnd: true,
+            isLeft: false,
+            newID: this.state.scene.id
+          })
+        }
+
+
+
+
   }
 
   componentDidMount(){
@@ -95,7 +121,7 @@ this.callApi(this.state.scene.left_id)
         }) 
     axios({
       method: 'GET',
-      url: `https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${this.state.currentIndex}.json`
+      url: `https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${this.state.id}.json`
     }).then(response => {
       
       this.setState({scene: response.data}) 
@@ -106,40 +132,11 @@ this.callApi(this.state.scene.left_id)
 
 
   render() {
-
-    return (
-      <div class ='center'>
-      
-
-      <div class="ui inverted segment">
-        <ImgDetails imgDetails={this.state.scene} />
-  
- 
-  <h4 class="ui horizontal inverted divider">
-    Choose
-  </h4>
-</div>
-
-        <div class="ui segment">
-  <div class="ui two column very relaxed grid">
-    <div class="column">
-    {/* <button class='ui button' onClick={() => this.Prev()}> {this.state.scene.left_text} </button> */}
-    <LeftButton  data={this.state.scene.left_text}  prev= {()=>this.Prev()}/>
-
-    </div>
-    <div class="column">
-    {/* <button class='ui button' onClick={() => this.Next()}> {this.state.scene.right_text} </button>  */}
-    <RightButton  data={this.state.scene.right_text} next= {()=>this.Next()}/>
-    </div>
-  </div>
-  <div class="ui vertical divider">
-    or
-  </div>
-</div>
-
-     
-      </div>
-    );
+    if (this.state.isEnd)
+      return <NewScene isLeft={this.state.isLeft} id={this.state.newID}/>
+      else
+      return <Scene scene={this.state.scene} prev={this.Prev} next={this.Next}/>
+    
   }
 }
 

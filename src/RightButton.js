@@ -18,7 +18,7 @@ constructor(props){
 
         return (
             <div>
-                     <button class='ui button' onClick={() => this.props.next()}> {this.props.data} </button>
+                     <button class='ui button' onClick={this.props.next}> {this.props.data} </button>
 
             </div>
         )
