@@ -2,6 +2,7 @@ import React from 'react';
 import Drama from './Drama';
 import Comedy from './Comedy'
 import Horror from './Horror'
+import AboutUs from './AboutUs'
 import {
   BrowserRouter as Router,
   Route,
@@ -18,11 +19,13 @@ export default function App() {
    
       <Router>
         <nav>
-          
+          <div class='grey'>
           <Link to="/">Home</Link>{' '}
           <Link to="/Drama">Drama</Link>{' '}
           <Link to="/Comedy">Comedy </Link>{' '}
-          <Link to="/Horror">  Horror</Link>
+          <Link to="/Horror">  Horror</Link>{' '}
+          <Link to="/AboutUs">AboutUs </Link>{' '}
+          </div>
         </nav>
   
         <div>
@@ -31,6 +34,8 @@ export default function App() {
           <Route path="/Drama" component={Drama} />
           <Route path="/Comedy" component={Comedy} />
           <Route path="/Horror" component={Horror} />
+          <Route path="/AboutUs" component={AboutUs} />
+     
           <Route component={Home} />
           </Switch>
         </div>
