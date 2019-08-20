@@ -7,7 +7,7 @@ export default class NewScene extends Component {
         scene_text:'',
         left_text: '',
         right_text: '', 
-        res: 0
+        resId: 0
     }
 
     handleSceneText = (event) => {
@@ -44,10 +44,13 @@ export default class NewScene extends Component {
         }).then(response => {
 
             console.log(response);
+            this.setState({
+                resId: response.data.id
+            })
 
         if (this.props.isLeft == true){
             axios.patch(`https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${this.props.id}.json` , {
-            "left_id": response.data.id
+            "left_id": this.state.resId
     
             }).then(res => console.log(res)).catch(error => console.log(error))
     
@@ -55,7 +58,7 @@ export default class NewScene extends Component {
         else{
 
             axios.patch(`https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${this.props.id}.json` , {
-                "right_id": response.data.id
+                "right_id": this.state.resId
         
                 }).then(res => console.log(res)).catch(error => console.log(error))
         
@@ -64,6 +67,7 @@ export default class NewScene extends Component {
         }).catch(error => console.log(error))
 
 
+        this.props.updateView(this.state.resId)
     }
 
     render() {
