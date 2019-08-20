@@ -18,7 +18,7 @@ let apiCallCount = 0;
 class Home extends Component {
 
   state = {
-    id: 1,
+    id: 62,
   scene: {},
   isEnd: false,
   isLeft: true,
@@ -27,11 +27,20 @@ class Home extends Component {
 
   }
 
-  updateView = id => {
-    this.setState({
-      id: id,
-      isEnd: false
-    })
+  updateView = (id1) => {
+    
+    console.log(this.state.id)
+    axios({
+      method: 'GET',
+      url: `https://cors-anywhere.herokuapp.com/https://aaa-api.herokuapp.com/scenes/${id1}.json`
+    }).then(response => {
+      this.setState({
+        id: id1,
+        isEnd: false
+      })
+      this.setState({scene: response.data}) 
+    
+    }).catch(error => console.log(error));
   }
 
   fakeAPICall = () =>
@@ -109,7 +118,7 @@ this.callApi(this.state.scene.left_id)
         else {
           this.setState({
             isEnd: true,
-            isLeft: false,
+            isLeft: true,
             newID: this.state.scene.id
           })
         }
